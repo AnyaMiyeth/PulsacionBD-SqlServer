@@ -23,9 +23,12 @@ namespace BLL
             {
                 persona.CalcularPulsacion();
                 conexion.Open();
-                repositorio.Guardar(persona);
-                conexion.Close();
-                return $"Se guardaron los datos satisfactoriamente";
+                if (repositorio.BuscarPorIdentificacion(persona.Identificacion)==null)
+                {
+                    repositorio.Guardar(persona);                 
+                    return $"Se guardaron los datos satisfactoriamente";
+                }
+                    return $"La persona ya existe";              
             }
             catch (Exception e)
             {
@@ -42,15 +45,8 @@ namespace BLL
                 conexion.Open();
                 respuesta.Personas = repositorio.ConsultarTodos();
                 conexion.Close();
-                if (respuesta.Personas.Count>0)
-                {
-                    respuesta.Mensaje = "Se consultan los Datos";
-                }
-                else
-                {
-                    respuesta.Mensaje = "No hay datos para consultar";
-                }
                 respuesta.Error = false;
+                respuesta.Mensaje = (respuesta.Personas.Count > 0) ? "Se consultan los Datos" : "No hay datos para consultar";
                 return respuesta;
             }
             catch (Exception e)
@@ -74,10 +70,7 @@ namespace BLL
                     conexion.Close();
                     return ($"El registro {persona.Nombre} se ha eliminado satisfactoriamente.");
                 }
-                else
-                {
-                    return ($"Lo sentimos, {identificacion} no se encuentra registrada.");
-                }
+                   return ($"Lo sentimos, {identificacion} no se encuentra registrada.");
             }
             catch (Exception e)
             {
@@ -91,17 +84,17 @@ namespace BLL
         {
             try
             {
+                personaNueva.CalcularPulsacion();
                 conexion.Open();
                 var personaVieja = repositorio.BuscarPorIdentificacion(personaNueva.Identificacion);
                 if (personaVieja != null)
                 {
                     repositorio.Modificar(personaNueva);
-                    conexion.Close();
-                    return ($"El registro {personaNueva.Nombre} se ha modificado satisfactoriamente.");
+                    return ($"El registro de {personaNueva.Nombre} se ha modificado satisfactoriamente.");
                 }
                 else
                 {
-                    return ($"Lo sentimos, {personaNueva.Identificacion} no se encuentra registrada.");
+                    return ($"Lo sentimos, la persona con Identificación {personaNueva.Identificacion} no se encuentra registrada.");
                 }
             }
             catch (Exception e)

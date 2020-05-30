@@ -5,16 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Entity;
+using System.Data;
+
 namespace DAL
 {
     public class PersonaRepository
     {
         private readonly SqlConnection _connection;
-        private readonly List<Persona> _personas = new List<Persona>();
+        
         public PersonaRepository(ConnectionManager connection)
         {
             _connection = connection._conexion;
         }
+
+
+        public void Guardar2(Persona persona)
+        {
+            using (var command = _connection.CreateCommand()) 
+            {
+                command.CommandText = "Insert Into Persona (Identificacion, Nombre, Edad, Sexo, Pulsacion) " +
+                    "Values (@Identificacion, @Nombre, @Edad, @Sexo, @Pulsacion)";
+                //command.Parameters.Add("@Id", SqlDbType.VarChar).Value = persona.Identificacion;
+                command.Parameters.AddWithValue("@Id", persona.Identificacion);
+                command.Parameters.AddWithValue("@Nombre", persona.Nombre);
+                command.Parameters.AddWithValue("@Edad", persona.Edad);
+                command.Parameters.AddWithValue("@Sexo", persona.Sexo);
+                command.Parameters.AddWithValue("@Pulsacion", persona.Pulsacion);
+                command.ExecuteNonQuery();
+
+            }
+               
+        }
+
+
+
+
+
+
         public void Guardar(Persona persona)
         {
             using (var command = _connection.CreateCommand())
@@ -40,12 +67,11 @@ namespace DAL
         }
         public List<Persona> ConsultarTodos()
         {
-            SqlDataReader dataReader;
             List<Persona> personas = new List<Persona>();
             using (var command = _connection.CreateCommand())
             {
-                command.CommandText = "Select * from persona ";
-                dataReader = command.ExecuteReader();
+                command.CommandText = "Select Identificacion,Nombre,Edad, Sexo, Pulsacion from persona ";
+                var dataReader = command.ExecuteReader();
                 if (dataReader.HasRows)
                 {
                     while (dataReader.Read())
@@ -74,13 +100,14 @@ namespace DAL
         {
             using (var command = _connection.CreateCommand())
             {
-                command.CommandText = "update persona set nombre=@Nombre, edad=@Edad, sexo=@Sexo, pulsacion=@Pulsacion where Identificacion=@Identificacion";
+                command.CommandText = @"update Persona set Nombre=@Nombre,Edad=@Edad, Sexo=@Sexo, Pulsacion= @Pulsacion 
+                                        where Identificacion=@Identificacion";
                 command.Parameters.AddWithValue("@Identificacion", persona.Identificacion);
                 command.Parameters.AddWithValue("@Nombre", persona.Nombre);
                 command.Parameters.AddWithValue("@Sexo", persona.Sexo);
                 command.Parameters.AddWithValue("@Edad", persona.Edad);
                 command.Parameters.AddWithValue("@Pulsacion", persona.Pulsacion);
-                command.ExecuteNonQuery();
+                var filas = command.ExecuteNonQuery();
             }
         }
         private Persona DataReaderMapToPerson(SqlDataReader dataReader)

@@ -313,6 +313,7 @@
             this.Controls.Add(this.label6);
             this.Name = "FrmGestionPersona";
             this.Text = "GestionPersona";
+            this.Load += new System.EventHandler(this.FrmGestionPersona_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

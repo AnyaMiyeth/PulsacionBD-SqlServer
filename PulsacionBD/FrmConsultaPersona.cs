@@ -16,8 +16,8 @@ namespace PulsacionBD
         PersonaService personaService;
         public FrmConsultaPersona()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            personaService = new PersonaService(connectionString);
+            
+            personaService = new PersonaService(ConfigConnection.ConnectionString);
             InitializeComponent();
         }
 
@@ -34,11 +34,15 @@ namespace PulsacionBD
                 TxtTotal.Text = personaService.Totalizar().Cuenta.ToString();
                 TxtTotalMujeres.Text = personaService.TotalizarTipo("F").Cuenta.ToString();
                 TxtTotalHombres.Text = personaService.TotalizarTipo("M").Cuenta.ToString();
-
+                MessageBox.Show(respuesta.Mensaje, "Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Solo se implento la consulta para todos ", "Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
            
 
-            MessageBox.Show(respuesta.Mensaje, "Busqueda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          
 
         }
     }

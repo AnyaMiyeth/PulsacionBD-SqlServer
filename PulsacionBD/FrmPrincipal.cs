@@ -20,13 +20,20 @@ namespace PulsacionBD
         private void gestionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmGestionPersona frmGestion = new FrmGestionPersona();
+             frmGestion.MdiParent=this;
             frmGestion.Show();
         }
 
         private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmConsultaPersona frmConsulta = new FrmConsultaPersona();
+           frmConsulta.MdiParent=this;
             frmConsulta.Show();
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

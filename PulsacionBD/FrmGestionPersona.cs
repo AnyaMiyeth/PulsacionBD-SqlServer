@@ -19,8 +19,7 @@ namespace PulsacionBD
         public FrmGestionPersona()
         {
             InitializeComponent();
-            var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-            personaService = new PersonaService(connectionString);
+             personaService = new PersonaService(ConfigConnection.ConnectionString);
         }
         private Persona MapearPersona()
         {
@@ -119,6 +118,11 @@ namespace PulsacionBD
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
+        }
+
+        private void FrmGestionPersona_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
