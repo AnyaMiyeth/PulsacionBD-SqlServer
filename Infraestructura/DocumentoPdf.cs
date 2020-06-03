@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Entity;
 using System.IO;
-using static System.Net.Mime.MediaTypeNames;
-
 namespace Infraestructura
 {
     public class DocumentoPdf
@@ -47,9 +41,5 @@ namespace Infraestructura
         
         }
 
-
-
-     
-
-       }
+    }
 }
