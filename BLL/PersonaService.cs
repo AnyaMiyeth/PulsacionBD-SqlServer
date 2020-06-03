@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entity;
 using DAL;
+using Infraestructura;
 
 namespace BLL
 {
@@ -80,6 +81,22 @@ namespace BLL
             finally { conexion.Close(); }
 
         }
+
+        public string GenerarPdf(List<Persona> personas, string filename)
+        {
+            DocumentoPdf documentoPdf = new DocumentoPdf();
+            try
+            {
+                documentoPdf.GuardarPdf(personas,filename);
+                return "Se genró el Documento satisfactoriamente";
+            }
+            catch (Exception e)
+            {
+
+                return "Error al crear docuemnto"+ e.Message;
+            }
+        }
+
         public string Modificar(Persona personaNueva)
         {
             try

@@ -38,6 +38,7 @@
             this.TxtTotal = new System.Windows.Forms.TextBox();
             this.BtnConsultar = new System.Windows.Forms.Button();
             this.DtgPersona = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DtgPersona)).BeginInit();
             this.SuspendLayout();
             // 
@@ -129,11 +130,23 @@
             this.DtgPersona.Size = new System.Drawing.Size(1669, 353);
             this.DtgPersona.TabIndex = 9;
             // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(1378, 134);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(179, 74);
+            this.button1.TabIndex = 18;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FrmConsultaPersona
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2043, 867);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.CmbTipo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -162,5 +175,6 @@
         private System.Windows.Forms.TextBox TxtTotal;
         private System.Windows.Forms.Button BtnConsultar;
         private System.Windows.Forms.DataGridView DtgPersona;
+        private System.Windows.Forms.Button button1;
     }
 }
